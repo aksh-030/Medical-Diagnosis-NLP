@@ -19,13 +19,6 @@ def listToString(s):
     string = " "  
     return (string.join(s))
 
-def get_word_freq(text):
-    words = ' '.join(text)
-    temp = Counter(words.split()).items()
-    freq_df = pandas.DataFrame(temp)
-    freq_df = freq_df.sort_values(1, ascending = False)
-    return freq_df
-
 # File to dataframe
 file_path = "combinepdf.pdf"
 file = open( file_path ,"rb")
