@@ -10,6 +10,9 @@ from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
+#nltk.download('punkt')
+#nltk.download('stopwords')
+#nltk.download('wordnet')
 ssl._create_default_https_context = ssl._create_unverified_context
 import spacy
 nlp = spacy.load('en_core_web_sm')
@@ -22,8 +25,10 @@ def listToString(s):
     return (string.join(s))
 
 # Create csv
-with open('corpus_dataframe.csv', 'w') as file:
-   pass 
+with open('corpus_dataframe.csv', 'w') as file: 
+   pass
+#df = pandas.read_csv('corpus_dataframe.csv', header=None)
+#df.columns = ['corpus_values'] 
 
 # Stop words
 sw_list=stopwords.words('english')
@@ -46,10 +51,12 @@ sw_domain = ["patient", "may", "disease", "cause", "duration", "treatment", "als
              "perform", "function", "typically", "frequently", "adult", "indicate", "administration", "explain", "using", "suggest",
              "called", "center", "head", "people", "resulting", "including", "period", "feature", "result", "environment", "fail",
              "quality", "outcome", "tool", "question", "identify", "appropriate", "cause", "description", "classic", "ascertain",
-             "benefit", "potential", "thraten", "life", "send", "set", "remember", "active", "establish", "assess", "guide"]
+             "benefit", "potential", "thraten", "life", "send", "set", "remember", "active", "establish", "assess", "guide",
+             "professional", "title", "signs", "symptoms", "treatment", "diagnosis", "test", "indicate", "situation",
+             "edition", "copyright"]
 
 # File extraction
-folder_with_pdfs = '//src_txt'
+folder_with_pdfs = 'C:\\Users\\aucseadmin\\Desktop\\4005\\pj'
 linesOfFiles = []
 for pdf_file in os.listdir(folder_with_pdfs):
     if pdf_file.endswith('.pdf'):
@@ -85,16 +92,18 @@ for pdf_file in os.listdir(folder_with_pdfs):
         lemmatizer = WordNetLemmatizer()
         lemmatized = [lemmatizer.lemmatize(w) for w in no_stops]
 
-        # removing stop words including topic domain & adj
+        # adjectives
         df['spacy_doc'] = list(nlp.pipe(df.strings))
         doc_adj = [token.text.lower() for doc in df.spacy_doc for token in doc if token.pos_=='ADJ']
         adj_list = list(set(doc_adj))
+
+        # stop words including topic domain & adj
         sw_list.extend( adj_list + sw_domain )
         tokens_nostop = [t for t in lemmatized if t not in sw_list ]
 
         # Dataframe to CSV
         corpus = " ".join(tokens_nostop)
-        df_corpus = pandas.DataFrame([corpus], columns=['corpus_value'])
+        df_corpus = pandas.DataFrame([corpus], columns=['corpus_values'])
         df_corpus.to_csv('corpus_dataframe.csv', mode='a', index=False, header=False)
 
 # Save stop words
