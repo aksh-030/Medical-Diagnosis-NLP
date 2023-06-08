@@ -10,9 +10,9 @@ from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
-#nltk.download('punkt')
-#nltk.download('stopwords')
-#nltk.download('wordnet')
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
 ssl._create_default_https_context = ssl._create_unverified_context
 import spacy
 nlp = spacy.load('en_core_web_sm')
@@ -26,9 +26,7 @@ def listToString(s):
 
 # Create csv
 with open('corpus_dataframe.csv', 'w') as file: 
-   pass
-#df = pandas.read_csv('corpus_dataframe.csv', header=None)
-#df.columns = ['corpus_values'] 
+   pass 
 
 # Stop words
 sw_list=stopwords.words('english')
