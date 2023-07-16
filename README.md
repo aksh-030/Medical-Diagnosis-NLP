@@ -14,4 +14,4 @@ A PDF of a medical handbook containing a list of diseases categorized by the aff
 ![Screenshot (1644)](https://github.com/aksh-030/Medical-Diagnosis-NLP/assets/74759004/e3c372b8-6f12-47df-934a-4efaf7c975cc)
 
 ## Scope
-The specifity could be improved to predict the exact disease ailing the patient. This could be done with a stronger data source.
+The specifity can be improved to predict the exact disease ailing the patient. This could be done with a stronger data source.
